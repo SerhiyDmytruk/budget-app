@@ -1,5 +1,8 @@
 import React from 'react';
-import Balance from '../Balance'
+import Balance from '../Balance';
+import Transactions from '../Transactions'
+
+let id = 0;
 
 class App extends React.Component {
 
@@ -23,7 +26,8 @@ class App extends React.Component {
       balance: state.balance + 1,
       transactions: [{
         label: 'increase',
-        value: 1
+        value: 1,
+        id: ++id,
       }, ...state.transactions]
     }))
   }
@@ -33,7 +37,8 @@ class App extends React.Component {
       balance: this.state.balance - 1,
       transactions: [{
         label: 'decrease',
-        value: -1
+        value: -1,
+        id: --id,
       }, ...state.transactions]
     }))
   }
@@ -42,28 +47,13 @@ class App extends React.Component {
     console.log('render');
 
       return (
-      <div>
-          <Balance balance={this.state.balance}>
-            some text
-          </Balance>
-          <button onClick={this.onIncrease}>
-            додати 1
-          </button>
+        <div>
+            <Balance balance={this.state.balance}>some text</Balance>
+            <button onClick={this.onIncrease}>додати 1</button>
+            <button onClick={this.onDecrease}>зменшити 1</button>
 
-          <button onClick={this.onDecrease}>
-            зменшити 1
-          </button>
-
-
-          { 
-            this.state.transactions.map((transactions) => {
-              <div>
-                Label:  {transactions.label}
-                <p>Value: {transactions.value}</p>
-              </div>
-            })
-          }
-      </div>
+            <Transactions transactions={this.state.transactions} />
+        </div>
       )
     };
 };
