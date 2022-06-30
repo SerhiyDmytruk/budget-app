@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
 
@@ -12,9 +13,11 @@ class Form extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(e, this.props, this.state);
-        
+
         this.props.onChange(this.state.value);
+        this.setState({
+            value: ''
+        });
     }
 
     onChange = (e) => {
@@ -39,6 +42,10 @@ class Form extends Component {
             </div>
         )        
     }
+}
+
+Form.propTypes = {
+    onChange: PropTypes.func
 }
 
 export default Form;

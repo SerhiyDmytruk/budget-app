@@ -1,10 +1,26 @@
-const Transaction = ({transactions}) => {
+import PropTypes from 'prop-types';
+
+const Transaction = ({transaction}) => {
     return (
         <div>
-            Label: {transactions.label}
-            <p>Value: {transactions.value}</p>
+            Label: {transaction.label}
+            <p>Value: {transaction.value}</p>
         </div>
     )
+}
+
+Transaction.propTypes = {
+    transaction: PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.number
+    })
+}
+
+Transaction.defaultProps = {
+    transaction: {
+        label: '',
+        value: 0
+    }
 }
 
 export default Transaction;
