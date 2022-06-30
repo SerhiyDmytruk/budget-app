@@ -24,16 +24,15 @@ class App extends React.Component {
     }))
   }
 
-
   render () {
       return (
-        <div>
+        <React.Fragment>
             <Balance balance={this.state.balance}>some text</Balance>
 
             <Form onChange={this.onChange}/>
 
             <Transactions transactions={this.state.transactions} />
-        </div>
+        </React.Fragment>
       )
     };
 };

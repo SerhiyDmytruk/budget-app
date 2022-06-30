@@ -5,4 +5,5 @@ const Balance = ({balance, children}) => {
         </div>
     )
 }
+
 export default Balance;

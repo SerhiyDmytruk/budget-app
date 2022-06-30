@@ -13,8 +13,8 @@ class Form extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         console.log(e, this.props, this.state);
+        
         this.props.onChange(this.state.value);
-
     }
 
     onChange = (e) => {
@@ -37,7 +37,7 @@ class Form extends Component {
                     <button>Зберегти</button>
                 </form>
             </div>
-        )
+        )        
     }
 }
 
