@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react';
+import {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 import './style.scss';
@@ -30,22 +30,22 @@ class Form extends Component {
         })
     }
 
-    render () {
+    render() {
         return (
             <Fragment>
                 <form onSubmit={this.onSubmit} className='form'>
 
                     <input type="number"
-                    className='form__input'
-                    name='balance' 
-                    placeholder='Сума'
-                    value = {this.state.value}
-                    onChange={this.onChange} />
+                           className='form__input'
+                           name='balance'
+                           placeholder='Сума'
+                           value={this.state.value}
+                           onChange={this.onChange}/>
 
                     <button className='form__button'>Зберегти</button>
                 </form>
             </Fragment>
-        )        
+        )
     }
 }
 

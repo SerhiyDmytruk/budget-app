@@ -1,5 +1,11 @@
+import ErrorBoundary from '../ErrorBoundary';
+
 const Statistics = () => {
-    return (<h1>Statistics</h1>  )
+    return (
+        <ErrorBoundary>
+            <h1>Statistics</h1>
+        </ErrorBoundary>
+    )
 }
 
 export default Statistics;

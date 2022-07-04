@@ -1,9 +1,9 @@
-import { BalanceStyle } from './style';
+import {BalanceStyle} from './style';
 
 const Balance = ({balance, children}) => {
     return (
         <BalanceStyle>
-            {children}: { balance }
+            {children}: {balance}
         </BalanceStyle>
     )
 }

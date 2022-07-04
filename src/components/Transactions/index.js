@@ -7,7 +7,7 @@ const Transactions = ({transactions = []}) => {
     return (
         <div className='transactions'>
             {
-              transactions.map((transaction) => <Transaction key={transaction.id} transaction={transaction} />)
+                transactions.map((transaction) => <Transaction key={transaction.id} transaction={transaction}/>)
             }
         </div>
     )

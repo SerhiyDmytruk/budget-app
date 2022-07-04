@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Wrapper } from './style';
+import {Wrapper} from './style';
 
 const Transaction = ({transaction: {value, label}}) => {
     return (
