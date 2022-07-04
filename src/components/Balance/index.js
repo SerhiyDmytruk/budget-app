@@ -1,8 +1,10 @@
+import { BalanceStyle } from './style';
+
 const Balance = ({balance, children}) => {
     return (
-        <div>
+        <BalanceStyle>
             {children}: { balance }
-        </div>
+        </BalanceStyle>
     )
 }
 

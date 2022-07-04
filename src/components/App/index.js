@@ -2,6 +2,9 @@ import React from 'react';
 import Balance from '../Balance';
 import Transactions from '../Transactions';
 import Form from '../Form';
+import { Wrapper, GlobalStyle } from './style';
+
+let id = 0;
 
 class App extends React.Component {
 
@@ -20,19 +23,24 @@ class App extends React.Component {
 
     this.setState((state) => ({
       balance: state.balance  + Number(value),
-      transactions: [{value, label: 'change'}, ...state.transactions]
+      transactions: [{
+        value, 
+        label: 'change', 
+        id: ++id
+      }, ...state.transactions]
     }))
   }
 
   render () {
       return (
-        <React.Fragment>
-            <Balance balance={this.state.balance}>some text</Balance>
+        <Wrapper>
+            <GlobalStyle />
+            <Balance balance={this.state.balance}>Balance</Balance>
 
             <Form onChange={this.onChange}/>
 
             <Transactions transactions={this.state.transactions} />
-        </React.Fragment>
+        </Wrapper>
       )
     };
 };

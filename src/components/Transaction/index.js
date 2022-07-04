@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import { Wrapper } from './style';
 
-const Transaction = ({transaction}) => {
+const Transaction = ({transaction: {value, label}}) => {
     return (
-        <div>
-            Label: {transaction.label}
-            <p>Value: {transaction.value}</p>
-        </div>
+        <Wrapper value={value}>
+            Label: {label}
+            <p>Value: {value}</p>
+        </Wrapper>
     )
 }
 
@@ -18,8 +19,7 @@ Transaction.propTypes = {
 
 Transaction.defaultProps = {
     transaction: {
-        label: '',
-        value: 0
+        label: ''
     }
 }
 

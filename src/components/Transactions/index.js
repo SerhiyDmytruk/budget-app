@@ -1,11 +1,13 @@
 import Transaction from '../Transaction';
 import PropTypes from 'prop-types';
 
+import './style.scss'
+
 const Transactions = ({transactions = []}) => {
     return (
-        <div>
+        <div className='transactions'>
             {
-              transactions.map((transactions) => <Transaction key={transactions.id} transactions={transactions} />)
+              transactions.map((transaction) => <Transaction key={transaction.id} transaction={transaction} />)
             }
         </div>
     )
@@ -18,4 +20,5 @@ Transactions.propTypes = {
 Transactions.defaultProps = {
     transactions: []
 }
+
 export default Transactions;

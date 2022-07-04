@@ -1,5 +1,7 @@
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+
+import './style.scss';
 
 class Form extends Component {
 
@@ -24,22 +26,25 @@ class Form extends Component {
         const value = e.target.value;
 
         this.setState({
-            value
+            value: +value
         })
     }
 
     render () {
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
+            <Fragment>
+                <form onSubmit={this.onSubmit} className='form'>
+
                     <input type="number"
+                    className='form__input'
                     name='balance' 
                     placeholder='Сума'
                     value = {this.state.value}
                     onChange={this.onChange} />
-                    <button>Зберегти</button>
+
+                    <button className='form__button'>Зберегти</button>
                 </form>
-            </div>
+            </Fragment>
         )        
     }
 }
