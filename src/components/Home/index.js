@@ -4,8 +4,6 @@ import Transactions from "../Transactions";
 import Form from "../Form";
 import ErrorBoundary from "../ErrorBoundary";
 
-let id = 0;
-
 class Home extends React.Component {
     constructor() {
         super();
@@ -18,15 +16,18 @@ class Home extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange = (value) => {
+    onChange = ({value, date, comment}) => {
+        const transaction = {
+            value: +value, 
+            comment,
+            date,
+            id: Date.now()
+        }
+        
         this.setState((state) => ({
             balance: state.balance + Number(value),
             transactions: [
-                {
-                    value,
-                    label: "change",
-                    id: ++id,
-                },
+                transaction,
                 ...state.transactions,
             ],
         }));
