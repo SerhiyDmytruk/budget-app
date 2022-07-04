@@ -1,48 +1,44 @@
-import React from 'react';
-import Balance from '../Balance';
-import Transactions from '../Transactions';
-import Form from '../Form';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import Home       from '../Home';
+import About      from '../About';
+import Statistics from '../Statistics';
+
 import { Wrapper, GlobalStyle } from './style';
 
-let id = 0;
 
-class App extends React.Component {
+const App = () => {
+  return (
 
-  constructor() {
-    super();
+    <Router>
+      <Wrapper>
+        <GlobalStyle />
 
-    this.state = {
-      balance: 0,
-      transactions: []
-    }
+        <nav>
+          <ul>
+            <li>
+              <Link exact="true" to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/statistics">Statistics</Link>
+            </li>
+          </ul>
+        </nav>
 
-    this.onChange = this.onChange.bind(this);
-  }
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/statistics" element={<Statistics />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
 
-  onChange = (value) => {
+      </Wrapper>
+    </Router>
 
-    this.setState((state) => ({
-      balance: state.balance  + Number(value),
-      transactions: [{
-        value, 
-        label: 'change', 
-        id: ++id
-      }, ...state.transactions]
-    }))
-  }
-
-  render () {
-      return (
-        <Wrapper>
-            <GlobalStyle />
-            <Balance balance={this.state.balance}>Balance</Balance>
-
-            <Form onChange={this.onChange}/>
-
-            <Transactions transactions={this.state.transactions} />
-        </Wrapper>
-      )
-    };
+  )
 };
 
 export default App;
