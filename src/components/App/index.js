@@ -1,44 +1,59 @@
 import React from "react";
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {open} from '../../utils/indexdb';
 import Home from '../Home';
 import About from '../About';
 import Statistics from '../Statistics';
-
-import {Wrapper, GlobalStyle} from './style';
+import Header from '../Header';
 import ErrorBoundary from '../ErrorBoundary';
 
-const App = () => {
-    return (
-        <ErrorBoundary>
-            <Router>
-                <Wrapper>
-                    <GlobalStyle/>
+import {Wrapper, GlobalStyle} from './style';
 
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link exact="true" to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/about">About</Link>
-                            </li>
-                            <li>
-                                <Link to="/statistics">Statistics</Link>
-                            </li>
-                        </ul>
-                    </nav>
+class App extends React.Component {
 
-                    <Routes>
-                        <Route path="/about" element={<About/>}/>
-                        <Route path="/statistics" element={<Statistics/>}/>
-                        <Route path="/" element={<Home/>}/>
-                    </Routes>
+    constructor(props) {
+        super(props);
 
-                </Wrapper>
-            </Router>
-        </ErrorBoundary>
-    )
+        this.state = {
+            loading: true
+        };
+    }
+
+    componentDidMount() {
+        open().then(() => {
+            this.setState({
+                loading: false
+            }).catch(()=> {
+                console.error('Помилка');
+            })
+        });
+    }
+
+    render() {
+
+        if (this.state.loading) {
+            return <div>Loading...</div>
+        }
+
+        return (
+            <ErrorBoundary>
+                <Router>
+                    <Wrapper>
+                        <GlobalStyle/>
+
+                       <Header />
+
+                        <Routes>
+                            <Route path="/about" element={<About/>}/>
+                            <Route path="/statistics" element={<Statistics/>}/>
+                            <Route path="/" element={<Home/>}/>
+                        </Routes>
+
+                    </Wrapper>
+                </Router>
+            </ErrorBoundary>
+        )
+    }
 };
 
 export default App;

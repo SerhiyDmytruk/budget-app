@@ -4,6 +4,8 @@ import Transactions from "../Transactions";
 import Form from "../Form";
 import ErrorBoundary from "../ErrorBoundary";
 
+import {getItems, addItem} from '../../utils/indexdb';
+
 class Home extends React.Component {
     constructor() {
         super();
@@ -16,7 +18,19 @@ class Home extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
+    componentDidMount() {
+        getItems().then((transactions) => {
+            this.setState({
+                transactions
+            });
+        }).catch((e) => {
+            debugger;
+            console.error(e);
+        })
+    }
+
     onChange = ({value, date, comment}) => {
+
         const transaction = {
             value: +value, 
             comment,
@@ -31,6 +45,8 @@ class Home extends React.Component {
                 ...state.transactions,
             ],
         }));
+
+        addItem(transaction);
     };
 
     render() {
