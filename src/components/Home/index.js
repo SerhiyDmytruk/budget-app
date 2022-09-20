@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState} from "react";
 import Balance from "../Balance";
 import Transactions from "../Transactions";
 import Form from "../Form";
@@ -6,30 +6,24 @@ import ErrorBoundary from "../ErrorBoundary";
 
 import {getItems, addItem} from '../../utils/indexdb';
 
-class Home extends React.Component {
-    constructor() {
-        super();
+const Home = () => {
 
-        this.state = {
-            balance: 0,
-            transactions: [],
-        };
+    const [balance, setBalance] = useState(0);
 
-        this.onChange = this.onChange.bind(this);
-    }
+    const [transactions, setTransactions] = useState([]);
 
-    componentDidMount() {
-        getItems().then((transactions) => {
-            this.setState({
-                transactions
-            });
+    useEffect(() => {
+
+        getItems().then((item) => {
+            setTransactions(item);
         }).catch((e) => {
             debugger;
             console.error(e);
         })
-    }
+    },[setTransactions]);
 
-    onChange = ({value, date, comment}) => {
+
+    const onChange = ({value, date, comment}) => {
 
         const transaction = {
             value: +value, 
@@ -38,30 +32,25 @@ class Home extends React.Component {
             id: Date.now()
         }
         
-        this.setState((state) => ({
-            balance: state.balance + Number(value),
-            transactions: [
-                transaction,
-                ...state.transactions,
-            ],
-        }));
+        setTransactions( [
+            transaction,
+            ...transactions,
+        ]);
+
+        setBalance(balance + Number(value));
 
         addItem(transaction);
     };
 
-    render() {
-        return (
-            <ErrorBoundary>
-                <React.Fragment>
-                    <Balance balance={this.state.balance}>Balance</Balance>
+    return (
+        <ErrorBoundary>
+            <Balance balance={balance}>Balance</Balance>
 
-                    <Form onChange={this.onChange}/>
+            <Form onChange={onChange}/>
 
-                    <Transactions transactions={this.state.transactions}/>
-                </React.Fragment>
-            </ErrorBoundary>
-        );
-    }
+            <Transactions transactions={transactions}/>
+        </ErrorBoundary>
+    );
 }
 
 export default Home;
